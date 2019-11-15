@@ -1,60 +1,70 @@
 #include<iostream>
 using namespace std;
-template <typename E> class TreeNode{
+
+template <typename E, typename T> class TreeNode{
 public:
-  int key;
-  E* data;
-  TreeNode<E> *next;
-  TreeNode<E> *prev;
+  E *key;
+  T *data;
+  TreeNode<E,T> *left;
+  TreeNode<E,T> *right;
 
   TreeNode();
-  TreeNode(int key, E& obj);
+  TreeNode(E *new_key, T *obj);
   ~TreeNode();
-  //friend class DoublyLL;
+  TreeNode<E,T>* getLeft(){return left;};
+  TreeNode<E,T>* getRight(){return right;};
+  E* getKey(){return key;};
+  T* getData(){return data;};
+
 };
 
-template<typename E>TreeNode<E>::TreeNode()
+template<typename E, typename T>TreeNode<E,T>::TreeNode()
 {
-  key = NULL;
-  data = NULL;
+  key = nullptr;
+  data = nullptr;
   left = nullptr;
   right = nullptr;
 }
-template<typename E>TreeNode<E>::TreeNode(int key, E& obj)
+template<typename E, typename T>TreeNode<E,T>::TreeNode(E *new_key, T *obj)
 {
-  key = -1;
+  key = new_key;
   data = obj;
   left = nullptr;
   right = nullptr;
 }
 
-template<typename E>TreeNode<E>::~TreeNode()
+template<typename E, typename T>TreeNode<E,T>::~TreeNode()
 {
-  key = NULL;
-  left = NULL;
-  right = NULL;
-  delete left, right, data;}
+  key = nullptr;
+  data = nullptr;
+  left = nullptr;
+  right = nullptr;
+  delete left, right, data;
+}
 
 template <class T> class BST{
   public:
   BST();
   ~BST();
 
-  void Insert(TreeNode<T> *node);
-  void InsertAt(int value, TreeNode<T> *node);
+  void Insert(TreeNode<T,T> *node);
+  void DestroyTree(TreeNode<T,T>  *node);
+  void InOrder(TreeNode<T,T>  *node);
+  void PreOrder(TreeNode<T,T>  *node);
+  void PostOrder(TreeNode<T,T>  *node);
+  //void InsertAt(int value, TreeNode<T> *node);
   bool Search(int value);
   bool deleteNode(int value);
-  TreeNode<T>* getSuccessor(TreeNode<T> *d);
-  TreeNode<T>* deleteNode(TreeNode<T> *d);
+  TreeNode<T,T> * getSuccessor(TreeNode<T,T>  *d);
 
   //helper function
   bool isEmpty();
-  TreeNode<T> getMin(); //return pointer to the node
-  TreeNode<T> getMax(); //return pointer to the node
+  TreeNode<T,T>* getMin(); //return pointer to the node
+  TreeNode<T,T>* getMax(); //return pointer to the node
   void printTree();
-  void recPrint(TreeNode<T> *node); //print a subtree if needed
+  void recPrint(TreeNode<T,T> *node); //print a subtree if needed
   private:
-    TreeNode<T> *root;
+    TreeNode<T,T> *root;
 };
 
 template <class T>BST<T>::BST(){
@@ -62,27 +72,42 @@ template <class T>BST<T>::BST(){
 }
 
 template <class T>BST<T>::~BST(){
-  //more character building
+  DestroyTree(root);
 }
 
-template <class T> void BST<T>::Insert(TreeNode<T> *node)
+template<class T>void BST<T>::DestroyTree(TreeNode<T,T> *node)
 {
-  if (root==NULL) node = root;//if nothing in the tree, insert at root
+  if (node != nullptr)
+  {
+    DestroyTree(node->left);
+    DestroyTree(node->right);
+    delete node;
+  }
+}
+
+template <class T> void BST<T>::Insert(TreeNode<T,T> *node)
+{
+  if (root==NULL)
+    root = node;//if nothing in the tree, insert at root
   else
   {
-    TreeNode<T> *curr = root;
-    TreeNode<T> *parent;
+    cout << "HERE "<< node->key << endl;
+    TreeNode<T,T> *curr = root;
+    TreeNode<T,T> *parent = nullptr;
+    //had to get rid of a parentheses to make it local but doesn't stop the loop in main
 
-    while(true)//looping until the value is added somewhere on the tree
+  while(curr != NULL)//looping until the value is added somewhere on the tree
     {
       parent = curr;
       if(node->key < curr->key) //comparing to the root to know which direction to go
       {
         curr = curr->left; //defining the direction (left)
-        if (curr==nullptr)//we made it to the leafs
+
+        if (curr == nullptr || curr == NULL)//we made it to the leafs
         {
-          parent->left = node; //adding under the current/parent -> left since the value is smaller
-          break; //exiting the loop
+            parent->left = node; //adding under the current/parent -> left since the value is smaller
+            cout<<"node inserted"<<endl;
+            break; //exiting the loop
         }
       }
       else
@@ -90,9 +115,10 @@ template <class T> void BST<T>::Insert(TreeNode<T> *node)
         if (node->key > curr->key) //comparing to the root to know which direction to go
         {
           curr = curr->right; //defining the direction (right)
-          if (curr==nullptr) //we made it to the leafs
+          if (curr == nullptr || curr == NULL) //we made it to the leafs
           {
             parent->right = node; //adding under the current/parent -> right since the value is greater
+            cout<<"node inserted"<<endl;
             break; //exiting the loop
           }
         }
@@ -103,26 +129,26 @@ template <class T> void BST<T>::Insert(TreeNode<T> *node)
 
 template <class T> bool BST<T>::Search(int value)
 {
-  if (root == NULL)return false;
+  if (root == NULL || root->key == value)return root;
   else
   {
-    TreeNode<T> *curr = root;
+    TreeNode<T,T> *curr = root;
     while (curr->key != value)
     {
       if(value < curr->key)curr = curr->left;
       else curr = curr->right;
       if (curr == NULL)return false;
     }
+    return curr;
   }
-  return true;
 }
 
 template <class T> bool BST<T>::deleteNode(int value)
 {
   if (root == NULL) return false;
 
-  TreeNode<T> *curr = root;
-  TreeNode<T> *parent = root;
+  TreeNode<T,T> *curr = root;
+  TreeNode<T,T> *parent = root;
   bool isLeft = true;
 
   //now let's look for the node to delete
@@ -186,7 +212,7 @@ template <class T> bool BST<T>::deleteNode(int value)
   }
   else//the node to delete has 2 children
   {
-    TreeNode<T> *successor = getSuccessor(curr);
+    TreeNode<T,T> *successor = getSuccessor(curr);
     if (curr == root)
     {
       root = successor;
@@ -205,11 +231,11 @@ template <class T> bool BST<T>::deleteNode(int value)
   return true;
 }
 
-template<class T> TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d)//d is the node to be deleted
+template<class T> TreeNode<T,T>* BST<T>::getSuccessor(TreeNode<T,T> *d)//d is the node to be deleted
 {
-  TreeNode<T> *sp = d; //sp is successor's parent and is initialized to d
-  TreeNode<T> *successor = d;
-  TreeNode<T> *curr = d->right; //start one right
+  TreeNode<T,T> *sp = d; //sp is successor's parent and is initialized to d
+  TreeNode<T,T> *successor = d;
+  TreeNode<T,T> *curr = d->right; //start one right
   while(curr!= NULL)
   {
     sp = successor;
@@ -226,7 +252,7 @@ template<class T> TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d)//d is the no
 
 //helper functions
 
-template <class T> void BST<T>::recPrint(TreeNode<T> *node)
+template <class T> void BST<T>::recPrint(TreeNode<T,T> *node)
 {
   if (node == NULL) return;
   recPrint(node->left);
@@ -234,36 +260,55 @@ template <class T> void BST<T>::recPrint(TreeNode<T> *node)
   recPrint(node->right);
 }
 
+template <class T> void BST<T>::InOrder(TreeNode<T,T> *node)
+{
+  if (node == NULL) return;
+  recPrint(node->left);
+  cout<<node->key<<endl;
+  recPrint(node->right);
+}
+
+template <class T> void BST<T>::PostOrder(TreeNode<T,T> *node)
+{
+  if (node == NULL) return;
+  recPrint(node->left);
+  recPrint(node->right);
+  cout<<node->key<<endl;
+}
+
+template <class T> void BST<T>::PreOrder(TreeNode<T,T> *node)
+{
+  if (node == NULL) return;
+  cout<<node->key<<endl;
+  recPrint(node->left);
+  recPrint(node->right);
+}
 
 template <class T> void BST<T>::printTree()
 {
   recPrint(root);
 }
 
-template <class T> TreeNode<T> BST<T>::getMax()
+template <class T>
+TreeNode<T,T>* BST<T>::getMax()
 {
-  TreeNode<T> *curr = root;
+  TreeNode<T,T> *curr = root;
   if (curr == NULL)//empty tree
-    return NULL;
-  while(!curr->right = NULL)
+    return nullptr;
+
+  while(curr->right != NULL)
   {
     curr = curr->right;
   }
 }
-template <class T> TreeNode<T> BST<T>::getMin()
+template <class T>
+TreeNode<T,T>* BST<T>::getMin()
 {
-  TreeNode<T> *curr = root;
+  TreeNode<T,T> *curr = root;
   if (curr == NULL)//empty tree
-    return NULL;
-  while(!curr->left = NULL)
+    return curr;
+  while(curr->left != NULL)
   {
     curr = curr->left;
   }
-}
-int main(int argc, char const *argv[]) {
-  BST<int> a;
-  TreeNode<int> b = 0;
-  a.Insert(b);
-  a.printTree();
-  return 0;
 }
