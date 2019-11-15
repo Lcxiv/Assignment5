@@ -3,18 +3,18 @@ using namespace std;
 
 template <typename E, typename T> class TreeNode{
 public:
-  E *key;
-  T *data;
+  E key;
+  T data;
   TreeNode<E,T> *left;
   TreeNode<E,T> *right;
 
   TreeNode();
-  TreeNode(E *new_key, T *obj);
+  TreeNode(E new_key, T obj);
   ~TreeNode();
   TreeNode<E,T>* getLeft(){return left;};
   TreeNode<E,T>* getRight(){return right;};
-  E* getKey(){return key;};
-  T* getData(){return data;};
+  E getKey(){return key;};
+  T getData(){return data;};
 
 };
 
@@ -25,7 +25,7 @@ template<typename E, typename T>TreeNode<E,T>::TreeNode()
   left = nullptr;
   right = nullptr;
 }
-template<typename E, typename T>TreeNode<E,T>::TreeNode(E *new_key, T *obj)
+template<typename E, typename T>TreeNode<E,T>::TreeNode(E new_key, T obj)
 {
   key = new_key;
   data = obj;
@@ -85,10 +85,13 @@ template<class T>void BST<T>::DestroyTree(TreeNode<T,T> *node)
   }
 }
 
-template <class T> void BST<T>::Insert(TreeNode<T,T> *node)
+template <class T>void BST<T>::Insert(TreeNode<T,T> *node)
 {
   if (root==NULL)
+  {
     root = node;//if nothing in the tree, insert at root
+  }
+
   else
   {
     cout << "HERE "<< node->key << endl;

@@ -8,7 +8,7 @@ using namespace std;
 
 
 int main(int argc, char const *argv[]) {
-BST<Student> *tree = new BST<Student>();
+BST<Student*> *tree = new BST<Student*>();
 Student *a = new Student(1,"Crean","Junior","Sociology",3.00,2012);
 Student *b = new Student(2,"blulb","Senior","Dance",2.00,0003);
 Student *c = new Student(3,"blibl","Freshman","Business",1.50,36);
@@ -17,14 +17,16 @@ Student *d = new Student(4,"arewt","Lolol","Shuffle",4.00,534);
 
 cout << "HERE "<< a->getID() << endl;
 cout << "HERE2 "<< a->getName() << endl;
+int studID = a->getID();
+int* numID = &studID;
 
-TreeNode<int,Student> *treeStud1 = new TreeNode<int,Student>(a->getID(),*a);
+TreeNode<int,Student*> *treeStud1 = new TreeNode<int,Student*>(a->getID(),a);
 // TreeNode<int,Student> *treeStud2 = new TreeNode<int,Student>(b->getID(),*b);
 // TreeNode<int,Student> *treeStud3 = new TreeNode<int,Student>(c->getID(),*c);
 // TreeNode<int,Student> *treeStud4 = new TreeNode<int,Student>(d->getID(),*d);
 cout<<"KEY " <<treeStud1->getKey()<<endl;
 tree->Insert(treeStud1);
-tree->recPrint(treeStud1);
+// tree->recPrint(treeStud1);
 // tree->getMax();
 //tree->printTree();
 //tree->Insert(treeStud2);
