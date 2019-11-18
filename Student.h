@@ -28,12 +28,12 @@ public:
   //https://www.learncpp.com/cpp-tutorial/96-overloading-the-comparison-operators/
 
 
-  bool operator!= (const Student &s1);
-  bool operator== (const Student &s1);
-  bool operator> (const Student &s1);
-  bool operator>= (const Student &s1);
-  bool operator< (const Student &s1);
-  bool operator<= (const Student &s1);
+  bool operator!= ( Student const &s1);
+  bool operator== (Student  const &s1);
+  bool operator> ( Student const &s1);
+  bool operator>= ( Student const &s1);
+  bool operator< ( Student const &s1);
+  bool operator<= ( Student const &s1);
 
 
   void print();

@@ -68,9 +68,7 @@ public:
   ListNode<T> *back;
   unsigned int size;
 
-//public:
   DoublyLinkedList();
-  DoublyLinkedList(int maxSize);
  ~DoublyLinkedList();
 
  //functions
@@ -95,16 +93,12 @@ unsigned int getSize();
  * [DoublyLinkedList default constructor]
  */
 
-template<class T> DoublyLinkedList<T>::DoublyLinkedList(){
+template<class T>
+DoublyLinkedList<T>::DoublyLinkedList(){
+  cout << "here in constructor" << endl;
   size = 0;
-  front = nullptr;
-  back = nullptr;
-}
-
-template<class T> DoublyLinkedList<T>::DoublyLinkedList(int maxSize){
-  size = maxSize;
-  front = nullptr;
-  back = nullptr;
+  front = NULL;
+  back = NULL;
 }
 
 /**
@@ -225,7 +219,7 @@ template<class T> int DoublyLinkedList<T>::deletePos(int d)
   while (curr->data!=d)
   {
     curr = curr->next;
-    if (curr==NULL)return NULL;
+    if (curr== NULL)return 0; //changed it from NULL
   }
   if (curr==front) front = curr->next;
   else curr->prev->next = curr->next;
@@ -245,12 +239,11 @@ template<class T> int DoublyLinkedList<T>::deletePos(int d)
 template <class T> void DoublyLinkedList<T>::printList()
 {
   ListNode<T> *curr = front;
-  while(true)
+  while(curr != NULL || curr != nullptr)
     {
-      if (curr->next==NULL)break;
+      //if (curr->next == NULL)break;
       cout<<curr->data<<endl;
       curr = curr->next;
-
     }
 }
 

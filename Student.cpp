@@ -28,32 +28,32 @@ void Student::print()
 //https://www.learncpp.com/cpp-tutorial/96-overloading-the-comparison-operators/
 
 
-bool Student::operator!=(const Student &s1)
+bool Student::operator!=(Student const &s1)
 {
   return this->m_id != s1.m_id;
 }
 
-bool Student::operator==(const Student &s1)
+bool Student::operator==(Student const &s1)
 {
   return (this->m_id == s1.m_id);
 }
 
-bool Student::operator>(const Student &s1)
+bool Student::operator>(Student const &s1)
 {
   return this->m_id > s1.m_id;
 }
 
-bool Student::operator>=(const Student &s1)
+bool Student::operator>=(Student const &s1)
 {
   return this->m_id >= s1.m_id;
 }
 
-bool Student::operator<(const Student &s1)
+bool Student::operator<(Student const &s1)
 {
   return this->m_id < s1.m_id;
 }
 
-bool Student::operator<=(const Student &s1)
+bool Student::operator<=(Student const &s1)
 {
   return this->m_id <= s1.m_id;
 }

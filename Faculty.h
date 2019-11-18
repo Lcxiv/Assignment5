@@ -7,9 +7,10 @@
 
 class Faculty : public Person
 {
-  int m_id, m_size;
+private:
+  int m_id;
   std::string m_name, m_level, m_department;
-  DoublyLinkedList<int> *adviseeList= new DoublyLinkedList<int>(10);
+  DoublyLinkedList<int> *adviseeList;
 
 public:
   Faculty();
@@ -18,7 +19,7 @@ public:
   void addStudent(int studID);
   int removeStudent(int studID);
   int getID(){return m_id;};
-  int getSize(){return m_size;}
+  int getSize(){adviseeList->getSize();}
   std::string getName(){return m_name;};
   std::string getLevel(){return m_level;};
   std::string getDepartment(){return m_department;};
@@ -26,6 +27,7 @@ public:
 
   int deleteStudent();
   void print();
+  void printAdvisee();
 
   bool operator!= (const Faculty &f1);
   bool operator== (const Faculty &f1);

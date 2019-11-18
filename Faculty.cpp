@@ -1,6 +1,7 @@
 #include "Faculty.h"
 #include "Person.h"
 
+using namespace std;
 Faculty::Faculty(){}
 // {
 //   facultyID = 0;
@@ -12,7 +13,10 @@ Faculty::Faculty(){}
 Faculty::~Faculty(){}
 
 Faculty::Faculty(int id,std::string name, std::string level, std::string department):
-m_id(id), m_name(name), m_level(level), m_department(department){}
+m_id(id), m_name(name), m_level(level), m_department(department)
+{
+  adviseeList = new DoublyLinkedList<int>();
+}
 
 void Faculty::addStudent(int studID)
 {
@@ -34,6 +38,13 @@ void Faculty::print()
   std::cout<<"the Faculty's department is: "<<getDepartment()<<"\n";
 }
 
+void Faculty::printAdvisee()
+{
+  cout << "here in print" << endl;
+  adviseeList->printList();
+  cout << "size" << adviseeList->getSize() << endl;
+
+}
 
 //Boolean operators
 

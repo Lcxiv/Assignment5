@@ -9,11 +9,18 @@ using namespace std;
 
 int main(int argc, char const *argv[]) {
 BST<Student> *tree = new BST<Student>();
+BST<Faculty> *treeF = new BST<Faculty>();
+
 Student *a = new Student(1,"Crean","Junior","Sociology",3.00,2012);
 Student *b = new Student(2,"blulb","Senior","Dance",2.00,0003);
 Student *c = new Student(3,"blibl","Freshman","Business",1.50,36);
 Student *d = new Student(4,"arewt","Lolol","Shuffle",4.00,534);
+Student *comp = new Student(1,"Crean","Junior","Sociology",3.00,2012);
 
+
+Faculty *f = new Faculty(0003, "Mike", "Tenured", "Psychology");
+f->addStudent(a->getID());
+f->addStudent(d->getID());
 
 cout << "HERE "<< a->getID() << endl;
 cout << "HERE2 "<< a->getName() << endl;
@@ -37,14 +44,12 @@ tree->Insert(treeStud3);
 tree->Insert(treeStud4);
 tree->printTree();
 
-//tree->~BST();
-//cout<<tree->Search(10)<<endl;
-//tree->recPrint(treeStud1);// TreeNode<Student*> *z = b;
-//Student &d = b;
-//TreeNode<Student*> c = new TreeNode<Student*>(b);
-//tree->Insert(z);
-// Student* a = new Student(0002, "Marc","Junior","Sociology",3.00,2012);
-// a->print();
+TreeNode<Faculty> *nodeFaculty = new TreeNode<Faculty>(f->getID(),f);
+treeF->Insert(nodeFaculty);
+//f->print();
+ f->printAdvisee();
+ cout<< "Comparing two ID's: " << a->operator==(*c) << endl;
+// treeF->printTree();
 
   return 0;
 }
