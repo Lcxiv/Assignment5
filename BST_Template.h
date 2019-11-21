@@ -1,3 +1,6 @@
+#ifndef BST_TEMPLATE_H
+#define BST_TEMPLATE_H
+
 #include<iostream>
 using namespace std;
 
@@ -233,6 +236,7 @@ template <class T> bool BST<T>::deleteNode(int value)
 
     successor->left = curr->left;
   }
+  cout<<"Object deleted"<<endl;
   return true;
 }
 
@@ -317,3 +321,4 @@ TreeNode<T>* BST<T>::getMin()
     curr = curr->left;
   }
 }
+#endif
