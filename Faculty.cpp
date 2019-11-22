@@ -2,14 +2,14 @@
 #include "Person.h"
 
 using namespace std;
-Faculty::Faculty(){}
-// {
-//   facultyID = 0;
-//   name;
-//   level;
-//   department;
-//
-// }
+Faculty::Faculty()
+{
+  m_id = 0;
+  m_name;
+  m_level;
+  m_department;
+
+}
 Faculty::~Faculty(){}
 
 Faculty::Faculty(int id,std::string name, std::string level, std::string department):
@@ -45,6 +45,7 @@ void Faculty::printAdvisee()
   cout << "size" << adviseeList->getSize() << endl;
 
 }
+
 
 //Boolean operators
 

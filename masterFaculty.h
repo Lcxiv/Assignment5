@@ -11,8 +11,8 @@ class masterFaculty
 {
 private:
   //TreeNode<Faculty> *nodeFaculty;
-  BST<Faculty> *facultyTree;
-  Faculty *facultyStaff;
+  BST<Faculty> *facultyTree = new BST<Faculty>();
+  //Faculty *facultyStaff;
 
 public:
   masterFaculty();
@@ -22,6 +22,7 @@ public:
   void deleteFaculty(TreeNode<Faculty> *node);
   bool deleteAdvisee(int id);
   bool searchFaculty(int id);
+  bool fileExists (const string &filename);
   void print();
   void printAdvisee();
   void readFromFile(string A);
