@@ -20,7 +20,7 @@ public:
   TreeNode<E>* getRight(){return right;};
   int getKey(){return key;};
   E* getData(){return data;};
-  friend class Faculty;
+  friend class masterFaculty;
 
 };
 
@@ -71,7 +71,7 @@ template <class T> class BST{
   void recPrint(TreeNode<T> *node); //print a subtree if needed
   private:
     TreeNode<T> *root;
-    friend class Faculty;
+    friend class masterFaculty;
 
 };
 

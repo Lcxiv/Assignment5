@@ -38,5 +38,7 @@ public:
   bool operator< (const Faculty &f1);
   bool operator<= (const Faculty &f1);
 
+  friend class masterFaculty;
+
 };
 #endif

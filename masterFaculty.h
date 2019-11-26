@@ -5,7 +5,8 @@
 #include "Faculty.h"
 #include "DoublyLinkedList.h"
 #include "FileReader.h"
-#include<iostream>
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 class masterFaculty
@@ -27,8 +28,8 @@ public:
   void print();
   void printAdvisee();
   void readFromFile(string name);
-  //void openFile(string name);
-  void writeFile(string name, TreeNode<Faculty> *node);
+  void saveFile();
+  void writeFile(const string &name, TreeNode<Faculty>*node);
 
 
 };

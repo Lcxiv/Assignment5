@@ -153,7 +153,7 @@ bool masterFaculty::fileExists(const string &filename)
   return fs.good();
 }
 
-void masterFaculty::writeFile(string name, TreeNode<Faculty> *node){
+void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
     ofstream of (name, ios::out | ios::binary);
     if (!of)
     {
@@ -166,25 +166,34 @@ void masterFaculty::writeFile(string name, TreeNode<Faculty> *node){
         return;
       else
       {
-        DoublyLinkedList<int> *list = node->getData()->getDoubly();
-        int j;
-        of.open(name);
-        of << node->getData()->getID();
-        of << node->getData()->getName();
-        of << node->getData()->getLevel();
-        of << node->getData()->getDepartment();
-        of << node->getData()->getSize();
-        //still needs to find a way to add the list advisees
-        for (int i = 0; i < node->getData()->adviseeList->getSize(); i++)
+        if (node != NULL)
         {
-          j = adviseeList[i];
-          of << j;
-        }
+          of.open(name);
+          cout << "Printing ID \n ------- \n" << node->getData()->getID() << "\n" << endl;
+          of << node->getData()->getID();
+          cout << "Printing Name \n ------- \n" << node->getData()->getName() << "\n" << endl;
+          of << node->getData()->getName();
+          cout << "Printing Level \n ------- \n" << node->getData()->getLevel() << "\n" << endl;
+          of << node->getData()->getLevel();
+          cout << "Printing Department \n ------- \n" << node->getData()->getDepartment() << "\n" << endl;
+          of << node->getData()->getDepartment();
+          cout << "Printing Size \n  ------- \n" << node->getData()->getSize() << "\n" << endl;
+          of << node->getData()->getSize(); //size of the doubly, needed for reading the file
+          //still needs to find a way to add the list advisees
 
-        writeFile(name, node->left); //following recPrint idea to make it recursive and visit all the nodes
-        writeFile(name, node->right);
+          node->getData()->adviseeList->writeList(name); //created a method to do it in the doublyLinkedList class
+          if (node->left != NULL)
+            writeFile(name, node->left); //following recPrint idea to make it recursive and visit all the nodes
+           else if (node->right != NULL)
+            writeFile(name, node->right);
+        }
       }
 
     }
+    of.close();
+}
 
+void masterFaculty::saveFile()
+{
+  writeFile("Faculty.out", facultyTree->root);
 }

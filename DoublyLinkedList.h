@@ -1,6 +1,7 @@
 #ifndef DOUBLYLINKEDLIST_H
 #define DOUBLYLINKEDLIST_H
 #include"ListEmpty.h"
+#include <fstream>
 /*
 Louis Condevaux
 Section 1
@@ -83,6 +84,7 @@ public:
 
 bool isEmpty();
 void printList();
+void writeList(const string &name);
 T getFirst();
 T getLast();
 unsigned int getSize();
@@ -196,7 +198,7 @@ template <class T> T DoublyLinkedList<T>::removeFront()
 template <class T>T DoublyLinkedList<T>::removeBack()
 {
   ListNode<T> *temp = back;
-  if (size == 0) cout<<"Empty, implement exception"<<endl;
+  if (size == 0) throw ListEmpty("The List is empty");
   if (size == 1) back = front;
   else back->prev->next= NULL;
   back = back->prev;
@@ -243,6 +245,20 @@ template <class T> void DoublyLinkedList<T>::printList()
     {
       //if (curr->next == NULL)break;
       cout<<curr->data<<endl;
+      curr = curr->next;
+    }
+}
+
+template <class T> void DoublyLinkedList<T>::writeList(const string &name)
+{
+  ofstream ofs (name, ios::out | ios::binary);
+  ListNode<T> *curr = front;
+  ofs.open(name);
+  while(curr != NULL || curr != nullptr)
+    {
+      //if (curr->next == NULL)break;
+      ofs << curr->data;
+      cout << "Printing Advisee ID \n ------- \n" << curr->data << "\n" << endl;
       curr = curr->next;
     }
 }
