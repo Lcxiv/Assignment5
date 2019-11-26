@@ -53,8 +53,9 @@ int main(int argc, char const *argv[]) {
 //  cout<< "Comparing two ID's: " << a->operator==(*c) << endl;
 //  treeF->deleteNode(f->getID());
 // treeF->printTree();
-masterFaculty mf;
-mf.readFromFile("FacultyTet.txt");
+// masterFaculty mf;
+// mf.readFromFile("FacultyTest.txt");
+//mf.writeFile(facultyTree->root,"FacultyOut");
 
   return 0;
 }

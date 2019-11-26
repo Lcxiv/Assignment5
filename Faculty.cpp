@@ -32,19 +32,20 @@ int Faculty::removeStudent(int studID)
 
 void Faculty::print()
 {
-  std::cout<<"the Faculty ID is: "<<getID()<<"\n";
-  std::cout<<"the Faculty name is: "<<getName()<<"\n";
-  std::cout<<"the Faculty level is: "<<getLevel()<<"\n";
-  std::cout<<"the Faculty's department is: "<<getDepartment()<<"\n";
+  std::cout << "the Faculty ID is: " << getID() << "\n";
+  std::cout << "the Faculty name is: " << getName() << "\n";
+  std::cout << "the Faculty level is: " << getLevel() << "\n";
+  std::cout << "the Faculty's department is: " << getDepartment() << "\n";
+  std::cout << "Number of advisees: " << adviseeList->getSize() << "\n";
 }
 
 void Faculty::printAdvisee()
 {
-  cout << "here in print" << endl;
+  //cout << "here in print" << endl;
+  //cout << "size" << adviseeList->getSize() << endl;
   adviseeList->printList();
-  cout << "size" << adviseeList->getSize() << endl;
-
 }
+
 
 
 //Boolean operators

@@ -10,6 +10,7 @@ class Faculty : public Person
 private:
   int m_id;
   std::string m_name, m_level, m_department;
+protected:
   DoublyLinkedList<int> *adviseeList;
 
 public:
@@ -23,7 +24,8 @@ public:
   std::string getName(){return m_name;};
   std::string getLevel(){return m_level;};
   std::string getDepartment(){return m_department;};
-  //DoublyLinkedList<int*> getAdviseeID(){return adviseeList;};
+  DoublyLinkedList<int> *getDoubly(){return adviseeList;};
+
 
   int deleteStudent();
   void print();

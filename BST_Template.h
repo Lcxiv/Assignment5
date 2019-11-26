@@ -1,5 +1,7 @@
 #ifndef BST_TEMPLATE_H
 #define BST_TEMPLATE_H
+#include "Faculty.h"
+#include "Student.h"
 
 #include<iostream>
 using namespace std;
@@ -18,6 +20,7 @@ public:
   TreeNode<E>* getRight(){return right;};
   int getKey(){return key;};
   E* getData(){return data;};
+  friend class Faculty;
 
 };
 
@@ -68,6 +71,8 @@ template <class T> class BST{
   void recPrint(TreeNode<T> *node); //print a subtree if needed
   private:
     TreeNode<T> *root;
+    friend class Faculty;
+
 };
 
 template <class T>BST<T>::BST(){

@@ -3,6 +3,7 @@
 
 #include "BST_Template.h"
 #include "Faculty.h"
+#include "DoublyLinkedList.h"
 #include "FileReader.h"
 #include<iostream>
 using namespace std;
@@ -25,9 +26,9 @@ public:
   bool fileExists (const string &filename);
   void print();
   void printAdvisee();
-  void readFromFile(string A);
+  void readFromFile(string name);
   //void openFile(string name);
-  void writeFile(string name);
+  void writeFile(string name, TreeNode<Faculty> *node);
 
 
 };

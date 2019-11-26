@@ -153,4 +153,38 @@ bool masterFaculty::fileExists(const string &filename)
   return fs.good();
 }
 
-void masterFaculty::writeFile(string name){}
+void masterFaculty::writeFile(string name, TreeNode<Faculty> *node){
+    ofstream of (name, ios::out | ios::binary);
+    if (!of)
+    {
+      cout << "An error occured while trying to open the file" << endl;
+    }
+    else
+    {
+      cout << "Printing data into " << name << "....." << endl;
+      if (node == nullptr)
+        return;
+      else
+      {
+        DoublyLinkedList<int> *list = node->getData()->getDoubly();
+        int j;
+        of.open(name);
+        of << node->getData()->getID();
+        of << node->getData()->getName();
+        of << node->getData()->getLevel();
+        of << node->getData()->getDepartment();
+        of << node->getData()->getSize();
+        //still needs to find a way to add the list advisees
+        for (int i = 0; i < node->getData()->adviseeList->getSize(); i++)
+        {
+          j = adviseeList[i];
+          of << j;
+        }
+
+        writeFile(name, node->left); //following recPrint idea to make it recursive and visit all the nodes
+        writeFile(name, node->right);
+      }
+
+    }
+
+}
