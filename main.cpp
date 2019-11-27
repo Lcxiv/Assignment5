@@ -54,7 +54,7 @@ int main(int argc, char const *argv[]) {
 //  treeF->deleteNode(f->getID());
 // treeF->printTree();
 masterFaculty mf;
-mf.readFromFile("FacultyTest.txt");
+mf.readFromFile("FacultyTable.bin");
 mf.saveFile();
 
   return 0;

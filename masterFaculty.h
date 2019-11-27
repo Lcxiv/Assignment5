@@ -21,15 +21,19 @@ public:
   ~masterFaculty();
 
   void addFaculty(TreeNode<Faculty> *node);
-  void deleteFaculty(TreeNode<Faculty> *node);
+  void createFaculty();
+  void deleteFaculty(int id);
   bool deleteAdvisee(int id);
-  bool searchFaculty(int id);
+  //Faculty* searchFaculty(int id);
   bool fileExists (const string &filename);
   void print();
   void printAdvisee();
   void readFromFile(string name);
   void saveFile();
   void writeFile(const string &name, TreeNode<Faculty>*node);
+  void printFaculty(int id);
+  
+  friend class Menu;
 
 
 };

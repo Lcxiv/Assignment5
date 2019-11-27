@@ -40,6 +40,7 @@ public:
   bool operator<= (const Faculty &f1);
 
   friend class masterFaculty;
+  friend class Menu;
 
 };
 #endif

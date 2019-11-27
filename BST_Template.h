@@ -20,7 +20,9 @@ public:
   TreeNode<E>* getRight(){return right;};
   int getKey(){return key;};
   E* getData(){return data;};
+
   friend class masterFaculty;
+  friend class Menu;
 
 };
 
@@ -60,8 +62,9 @@ template <class T> class BST{
   void PostOrder(TreeNode<T>  *node);
   //void InsertAt(int value, TreeNode<T> *node);
   bool Search(int value);
+  TreeNode<T> *getNode(int value);
   bool deleteNode(int value);
-  TreeNode<T> * getSuccessor(TreeNode<T>  *d);
+  TreeNode<T> *getSuccessor(TreeNode<T>  *d);
 
   //helper function
   bool isEmpty();
@@ -72,6 +75,8 @@ template <class T> class BST{
   private:
     TreeNode<T> *root;
     friend class masterFaculty;
+    friend class Menu;
+
 
 };
 
@@ -141,7 +146,11 @@ template <class T>void BST<T>::Insert(TreeNode<T> *node)
 
 template <class T> bool BST<T>::Search(int value)
 {
-  if (root == NULL || root->key == value)return false;
+  if (root == NULL || root->key == value)
+  {
+    cout << "The ID does not exist... Sorry." << endl;
+    return false;
+  }
   else
   {
     TreeNode<T> *curr = root;
@@ -152,7 +161,30 @@ template <class T> bool BST<T>::Search(int value)
       if (curr == NULL)return false;
     }
   }
+  cout << "The ID has been found..." << endl;
   return true;
+
+}
+
+template <class T> TreeNode<T>* BST<T>::getNode(int value)
+{
+  if (root == NULL || root->key == value)
+  {
+    cout << "The ID does not exist... Sorry." << endl;
+
+  }
+  else
+  {
+    TreeNode<T> *curr = root;
+    while (curr->key != value)
+    {
+      if(value < curr->key)curr = curr->left;
+      else curr = curr->right;
+      if (curr == NULL)return curr;
+    }
+    return curr;
+  }
+  cout << "The ID has been found..." << endl;
 
 }
 

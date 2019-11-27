@@ -15,15 +15,74 @@ void masterFaculty::addFaculty(TreeNode<Faculty> *node)
   facultyTree->Insert(node);
 }
 
-void masterFaculty::deleteFaculty(TreeNode<Faculty> *node)
+void masterFaculty::createFaculty()
 {
-  facultyTree->deleteNode(node->getKey());
+  bool addMore = true;
+  string n, level, department, line;
+  int id, numAdvisees, idAdvisees = 0;
+  Faculty *facultyStaff;
+  TreeNode<Faculty> *nodeFaculty;
+  char decision;
+  while (addMore) // boolean set to true
+  {
+    cout << "Please enter your values to create a faculty Person." << endl;
+
+    cout << "Enter the ID of the faculty member: " << endl;
+    cin >> id;
+
+    cout << "Enter the name of the faculty member: " << endl;
+    cin >> n;
+
+    cout << "Enter the level of the faculty member: " << endl;
+    cin >> level;
+
+    cout << "Enter the department of the faculty member: " << endl;
+    cin >> department;
+
+    facultyStaff = new Faculty(id,n,level,department);
+
+    cout << "Enter the number of advisees you want to add for this faculty member: " << endl;
+    cin >> numAdvisees;
+
+    for (int i = 0; i < numAdvisees; i++)
+    {
+      cout << "Enter the ID of the student number " << i+1 << ":" << endl;
+      cin >> idAdvisees;
+      facultyStaff->addStudent(idAdvisees);
+    }
+    cout << "The process to add a faculty member is complete." << endl;
+
+    nodeFaculty = new TreeNode<Faculty>(facultyStaff->getID(), facultyStaff); //creating a new treeNode to insert it inside the tree with a specific ID.
+    facultyTree->Insert(nodeFaculty); //inserting the node inside the tree
+
+    //checking if the User wants to create another faculty member
+
+    cout << "Would you like to add another faculty member? Y/N" << endl;
+    cin >> decision;
+    //decision.toupper();
+    if (decision == 'Y' || decision == 'y')
+      addMore = true;
+    else if (decision == 'N' || decision == 'n')
+    {
+      cout << "Thank you, your faculty member has been added. Exiting..." << endl;
+      addMore = false;
+    }
+    else
+    {
+      cout << "Please enter a valid input (Y/N)" << endl;
+      cin >> decision;
+    }
+  }
+}
+void masterFaculty::deleteFaculty(int id)
+{
+  facultyTree->deleteNode(id);
 }
 
-bool masterFaculty::searchFaculty(int id)
-{
-  facultyTree->Search(id);
-}
+// Faculty* masterFaculty::searchFaculty(int id)
+// {
+//   return facultyTree->Search(id);
+// }
 
 void masterFaculty::print()
 {
@@ -38,7 +97,6 @@ void masterFaculty::readFromFile(string name)
   ifstream fs;
   Faculty *facultyStaff;
   TreeNode<Faculty> *nodeFaculty;
-  bool addMore = true;
   char decision;
 
   if (fileExists(name)) //calls boolean function to check if a file with the name exists
@@ -89,61 +147,7 @@ void masterFaculty::readFromFile(string name)
       facultyTree->Insert(nodeFaculty);
   }else //creating from scratch the faculty person
   {
-    //enum decision {yes = "YES", no = "NO"};
-
-    //Asking the User to insert their own values for the faculty member
-
-    while (addMore) // boolean set to true
-    {
-      cout << "No file called " << name << " has been found."
-      << "Please enter your values to create a faculty Person." << endl;
-
-      cout << "Enter the ID of the faculty member: " << endl;
-      cin >> id;
-
-      cout << "Enter the name of the faculty member: " << endl;
-      cin >> n;
-
-      cout << "Enter the level of the faculty member: " << endl;
-      cin >> level;
-
-      cout << "Enter the department of the faculty member: " << endl;
-      cin >> department;
-
-      facultyStaff = new Faculty(id,n,level,department);
-
-      cout << "Enter the number of advisees you want to add for this faculty member: " << endl;
-      cin >> numAdvisees;
-
-      for (int i = 0; i < numAdvisees; i++)
-      {
-        cout << "Enter the ID of the student number " << i+1 << ":" << endl;
-        cin >> idAdvisees;
-        facultyStaff->addStudent(idAdvisees);
-      }
-      cout << "The process to add a faculty member is complete." << endl;
-
-      nodeFaculty = new TreeNode<Faculty>(facultyStaff->getID(), facultyStaff); //creating a new treeNode to insert it inside the tree with a specific ID.
-      facultyTree->Insert(nodeFaculty); //inserting the node inside the tree
-
-      //checking if the User wants to create another faculty member
-
-      cout << "Would you like to add another faculty member? Y/N" << endl;
-      cin >> decision;
-      //decision.toupper();
-      if (decision == 'Y' || decision == 'y')
-        addMore = true;
-      else if (decision == 'N' || decision == 'n')
-      {
-        cout << "Thank you, your faculty member has been added. Exiting..." << endl;
-        addMore = false;
-      }
-      else
-      {
-        cout << "Please enter a valid input (Y/N)" << endl;
-        cin >> decision;
-      }
-    }
+    createFaculty();
   }
 }
 
@@ -195,10 +199,19 @@ void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
     }
 
   }
-  //of.close();
 }
 
 void masterFaculty::saveFile()
 {
-  writeFile("Faculty.out", facultyTree->root);
+  writeFile("FacultyTable.bin", facultyTree->root);
+}
+
+void masterFaculty::printFaculty(int id)
+{
+  TreeNode<Faculty> *node = new TreeNode<Faculty>();
+  //facultyTree->searchFaculty(id);
+  node = facultyTree->getNode(id);
+  node->getData()->print();
+  node->getData()->printAdvisee();
+
 }
