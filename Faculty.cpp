@@ -47,7 +47,6 @@ void Faculty::printAdvisee()
 }
 
 
-
 //Boolean operators
 
 

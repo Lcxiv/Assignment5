@@ -84,7 +84,7 @@ public:
 
 bool isEmpty();
 void printList();
-void writeList(const string &name);
+void writeList(ofstream &of, const string &name);
 T getFirst();
 T getLast();
 unsigned int getSize();
@@ -249,16 +249,15 @@ template <class T> void DoublyLinkedList<T>::printList()
     }
 }
 
-template <class T> void DoublyLinkedList<T>::writeList(const string &name)
+template <class T> void DoublyLinkedList<T>::writeList(ofstream &of, const string &fileName)
 {
-  ofstream ofs (name, ios::out | ios::binary);
+  of.open(fileName, ios::out | ios::app);
   ListNode<T> *curr = front;
-  ofs.open(name);
   while(curr != NULL || curr != nullptr)
     {
       //if (curr->next == NULL)break;
-      ofs << curr->data;
       cout << "Printing Advisee ID \n ------- \n" << curr->data << "\n" << endl;
+      of << curr->data << "\n";
       curr = curr->next;
     }
 }
