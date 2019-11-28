@@ -12,13 +12,13 @@ using namespace std;
 
 class masterFaculty
 {
-//private:
-public:
+private:
+
   //TreeNode<Faculty> *nodeFaculty;
   BST<Faculty> *facultyTree = new BST<Faculty>();
   //Faculty *facultyStaff;
 
-//public:
+public:
   masterFaculty();
   ~masterFaculty();
 

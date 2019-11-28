@@ -172,7 +172,7 @@ bool masterFaculty::fileExists(const string &filename)
   ifstream fs(filename);
   return fs.good();
 }
-
+//pretty much a copy of the data, will be used for rollback (adding them each time a pop or insert is done?)
 void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
   ofstream of;
   of.open(name, ios::out | ios::app);
@@ -204,8 +204,9 @@ void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
           cout << "Printing Size \n  ------- \n" << node->getData()->getSize() << "\n" << endl;
           of << node->getData()->getSize() << "\n"; //size of the doubly, needed for reading the file
           //still needs to find a way to add the list advisees
-          of.close();
+
           node->getData()->adviseeList->writeList(of,name); //created a method to do it in the doublyLinkedList class
+          of.close();
           if (node->left != NULL)
             writeFile(name, node->left); //following recPrint idea to make it recursive and visit all the nodes
             else if (node->right != NULL)
@@ -219,7 +220,7 @@ void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
 
 void masterFaculty::saveFile()
 {
-  writeFile("FacultyTable.bin", facultyTree->root);
+  writeFile("SaveFacultyTable.bin", facultyTree->root);
 }
 
 void masterFaculty::printFaculty(int id)
@@ -229,5 +230,4 @@ void masterFaculty::printFaculty(int id)
   node = facultyTree->getNode(id);
   node->getData()->print();
   node->getData()->printAdvisee();
-
 }

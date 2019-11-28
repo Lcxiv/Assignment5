@@ -52,16 +52,32 @@ void Menu::Options(unsigned int choice)
       {
         cout << "Printing all Students' ID in Order..." << endl;
         ms->studentTree->InOrder(ms->studentTree->root);
-        cout << "Please enter your new choice: " << endl;
-        cin >> choice;
+        cout << "For more options, enter 20 (PreOrder), 40(PostOrder), or 0 to get out" << endl;
+        int order;
+        cin >> order;
+        if (order == 20) ms->studentTree->PreOrder(ms->studentTree->root);
+        else if(order == 40) ms->studentTree->PostOrder(ms->studentTree->root);
+        else
+        {
+          cout << "Please enter your new choice: " << endl;
+          cin >> choice;
+        }
       }
     //cout << "Choice 2: Print all faculty and their information (sorted by ascending id #)." << endl;
       else if (choice == 2)
       {
         cout << "Printing all faculty's ID in Order..." << endl;
         mf->facultyTree->InOrder(mf->facultyTree->root);
-        cout << "Please enter your new choice: " << endl;
-        cin >> choice;
+        cout << "For more options, enter 20 (PreOrder), 40(PostOrder), or 0 to get out" << endl;
+        int order;
+        cin >> order;
+        if (order == 20) mf->facultyTree->PreOrder(mf->facultyTree->root);
+        else if(order == 40) mf->facultyTree->PostOrder(mf->facultyTree->root);
+        else
+        {
+          cout << "Please enter your new choice: " << endl;
+          cin >> choice;
+        }
       }
     //cout << "Choice 3: Find and display student information given the students id." << endl;
       else if (choice == 3)
@@ -118,16 +134,33 @@ void Menu::Options(unsigned int choice)
     //cout << "Choice 6: Given a faculty id, print ALL the names and info of his/her advisees." << endl;
       else if (choice == 6)
       {
-        cout << " Please enter the Faculty ID." << endl;
-        cin >> id;
-
-        TreeNode<Faculty> *nodeF = new TreeNode<Faculty>();
-        if (mf->Search(id))
-        {
-          nodeF = mf->searchFaculty(id);
-          int StudLengthID = nodeF->getData()->getSize();
-          nodeF->getData()->printAdvisee();
-        }
+        // cout << "Please enter the Faculty ID:" << endl;
+        // cin >> id;
+        //
+        // TreeNode<Faculty> *nodeF = new TreeNode<Faculty>();
+        // TreeNode<Student> *nodeStud = new TreeNode<Student>();
+        // int adviseeNum;
+        // int studLengthID;
+        //
+        //
+        // if (mf->Search(id))
+        // {
+        //   nodeF = mf->searchFaculty(id);
+        //   studLengthID = nodeF->getData()->getSize();
+        //   nodeF->getData()->printAdvisee();
+        //   cout << "here" << endl;
+        //   cout << nodeF->getData()->adviseeList->getFirst()<<endl;
+        //   for (int i = 0; i < studLengthID; i++)
+        //   {
+        //     adviseeNum = nodeF->getData()->adviseeList->;
+        //     cout << "Advisee: " << adviseeNum << endl;
+        //     if (ms->Search(adviseeNum))
+        //     {
+        //       nodeStud = ms->searchStudent(adviseeNum);
+        //       nodeStud->getData()->print();
+        //     }
+        //   }
+        // }
         cout << "Please enter your new choice: " << endl;
         cin >> choice;
       }
@@ -141,7 +174,7 @@ void Menu::Options(unsigned int choice)
     //cout << "Choice 8: Delete a student." << endl;
       else if (choice == 8)
       {
-        cout << "Please enter which ID in order to delete the Student  that matches." << endl;
+        cout << "Please enter which ID in order to delete the Student that matches." << endl;
         cin >> id;
         ms->deleteStudent(id);
         cout << "Please enter your new choice: " << endl;
@@ -166,7 +199,18 @@ void Menu::Options(unsigned int choice)
     //cout << "Choice 11: Change a student’s advisor given the student id and the new faculty id." << endl;
     else if (choice == 11)
     {
-      cout << "Not done yet" << endl;
+      cout << "Please enter the Student ID: " << endl;
+      cin >> id;
+      TreeNode<Student> *nodeS = new TreeNode<Student>();
+      if (ms->Search(id))
+      {
+        nodeS = ms->searchStudent(id);
+        cout << "Please enter the Advisor ID you want to assign." << endl;
+        int newID;
+        cin >> newID;
+        nodeS->getData()->setAdvisor(newID);
+        cout << "The Student has been correctly reassigned." << endl;
+      }
       cout << "Please enter your new choice: " << endl;
       cin >> choice;
     }
@@ -190,6 +234,8 @@ void Menu::Options(unsigned int choice)
       else if (choice == 14)
       {
         cout << "Goodbye." << endl;
+        ms->saveFile();
+        mf->saveFile();
         notOver = false;
       }
   }

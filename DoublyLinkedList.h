@@ -290,6 +290,23 @@ template <class T> T DoublyLinkedList<T>::getFirst()
 
 }
 
+template <class T> T DoublyLinkedList<T>::find(int d)
+{
+  if (size == 0) throw ListEmpty("The list has nothing in it.");
+
+  ListNode<T> *curr = front;
+  while (curr->data != d)
+  {
+    curr = curr->next;
+    if (curr == NULL)
+    {
+      cout << "The value does not exist." << endl;
+      break;
+    }
+  }
+  return curr->data;
+}
+
 /**
  * [getLast returns the last element of the list]
  */

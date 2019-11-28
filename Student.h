@@ -18,6 +18,7 @@ public:
 
   int getID(){return m_id;};
   int getAdvisorField(){return m_advisorField;};
+  void setAdvisor(int advisorID){m_advisorField = advisorID;};
   double getGPA(){return m_studentGPA;};
   std::string getName(){return m_name;};
   std::string getLevel(){return m_level;};

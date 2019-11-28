@@ -141,7 +141,8 @@ void masterStudent::readFromFile(const string &name)
 
 
           stud = new Student (id, n, level, majorF, studGPA, advisorID);
-
+          nodeStudent = new TreeNode<Student>(stud->getID(), stud);
+          studentTree->Insert(nodeStudent);
         }
         fs.close(); // not necessary but kept in case
       }else
@@ -151,8 +152,7 @@ void masterStudent::readFromFile(const string &name)
 
       //place where the Student is added to the tree
 
-      nodeStudent = new TreeNode<Student>(stud->getID(), stud);
-      studentTree->Insert(nodeStudent);
+
   }else //creating from scratch the Student if there is no file to pull from
   {
     createStudent();
@@ -212,5 +212,5 @@ void masterStudent::writeFile(const string &name, TreeNode<Student> *node)
 
 void masterStudent::saveFile()
 {
-  writeFile("StudentTable.bin", studentTree->root);
+  writeFile("SaveStudentTable.bin", studentTree->root);
 }
