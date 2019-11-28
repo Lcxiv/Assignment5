@@ -2,6 +2,6 @@
 class Menu
 {
 public:
-  unsigned int choice;
-  void Options(unsigned int &choice);
+  //unsigned int choice;
+  void Options(unsigned int choice);
 };

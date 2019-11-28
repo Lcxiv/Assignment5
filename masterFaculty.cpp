@@ -4,7 +4,7 @@ using namespace std;
 masterFaculty::masterFaculty(){
   BST<Faculty> *facultyTree = NULL;
   //Faculty *facultyStaff = NULL;
-};
+}
 
 masterFaculty::~masterFaculty(){
   delete facultyTree;
@@ -79,17 +79,22 @@ void masterFaculty::deleteFaculty(int id)
   facultyTree->deleteNode(id);
 }
 
-// Faculty* masterFaculty::searchFaculty(int id)
-// {
-//   return facultyTree->Search(id);
-// }
+bool masterFaculty::Search(int idF)
+{
+  facultyTree->Search(idF);
+}
+
+TreeNode<Faculty> *masterFaculty::searchFaculty(int idF)
+{
+   return facultyTree->getNode(idF);
+}
 
 void masterFaculty::print()
 {
   facultyTree->printTree();
 }
 
-void masterFaculty::readFromFile(string name)
+void masterFaculty::readFromFile(const string &name)
 {
   string n, level, department, line;
   int id, numAdvisees, idAdvisees = 0;
@@ -107,33 +112,36 @@ void masterFaculty::readFromFile(string name)
         while(getline(fs,line)) // reading the file and extracting the values to create a faculty member
         {
           id = stoi(line);
-          cout << "The id is: " << id << endl;
+          //cout << "The id is: " << id << endl;
 
           getline(fs,line);
           n = line;
-          cout << "Name: " << n << endl;
+          //cout << "Name: " << n << endl;
 
           getline(fs,line);
           level = line;
-          cout << "Level: " << level << endl;
+          //cout << "Level: " << level << endl;
 
           getline(fs,line);
           department = line;
-          cout << "Department: " << department << endl;
+          //cout << "Department: " << department << endl;
 
           getline(fs,line);
           numAdvisees = stoi(line);
-          cout << "Number of advisees: " << numAdvisees << endl;
+          //cout << "Number of advisees: " << numAdvisees << endl;
+
           facultyStaff = new Faculty (id, n, level, department);
 
           for (int i = 0; i < numAdvisees; i++) //for loop based on the number of advisees to add
           {
-            cout << "Advisee's ID number " << i+1 << ":" << endl;
+            //cout << "Advisee's ID number " << i+1 << ":" << endl;
             getline(fs,line);
             idAdvisees = stoi(line);
-            cout << idAdvisees << endl;
+            //cout << idAdvisees << endl;
             facultyStaff->addStudent(idAdvisees);
           }
+          nodeFaculty = new TreeNode<Faculty>(facultyStaff->getID(), facultyStaff);
+          facultyTree->Insert(nodeFaculty);
         }
         fs.close(); // not necessary but kept in case
       }else
@@ -143,8 +151,8 @@ void masterFaculty::readFromFile(string name)
 
       //place where the faculty member is added to the tree
 
-      nodeFaculty = new TreeNode<Faculty>(facultyStaff->getID(), facultyStaff);
-      facultyTree->Insert(nodeFaculty);
+      // nodeFaculty = new TreeNode<Faculty>(facultyStaff->getID(), facultyStaff);
+      // facultyTree->Insert(nodeFaculty);
   }else //creating from scratch the faculty person
   {
     createFaculty();
@@ -159,7 +167,7 @@ bool masterFaculty::fileExists(const string &filename)
 
 void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
   ofstream of;
-  of.open(name, ios::out);
+  of.open(name, ios::out | ios::app);
   if (!of)
   {
     cout << "An error occured while trying to open the file" << endl;
@@ -168,7 +176,7 @@ void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
   {
     if (of.is_open())
     {
-      cout << "Printing data into " << name << "....." << endl;
+      cout << "Printing data into " << name << "..... \n" << endl;
       if (node == nullptr)
         return;
       else

@@ -7,16 +7,18 @@
 #include "FileReader.h"
 #include <iostream>
 #include <fstream>
+
 using namespace std;
 
 class masterFaculty
 {
-private:
+//private:
+public:
   //TreeNode<Faculty> *nodeFaculty;
   BST<Faculty> *facultyTree = new BST<Faculty>();
   //Faculty *facultyStaff;
 
-public:
+//public:
   masterFaculty();
   ~masterFaculty();
 
@@ -24,15 +26,16 @@ public:
   void createFaculty();
   void deleteFaculty(int id);
   bool deleteAdvisee(int id);
-  //Faculty* searchFaculty(int id);
+  bool Search(int idF);
+  TreeNode<Faculty> *searchFaculty(int idF);
   bool fileExists (const string &filename);
   void print();
   void printAdvisee();
-  void readFromFile(string name);
-  void saveFile();
+  void readFromFile(const string &name);
   void writeFile(const string &name, TreeNode<Faculty>*node);
+  void saveFile();
   void printFaculty(int id);
-  
+
   friend class Menu;
 
 

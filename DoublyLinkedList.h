@@ -97,7 +97,7 @@ unsigned int getSize();
 
 template<class T>
 DoublyLinkedList<T>::DoublyLinkedList(){
-  cout << "here in constructor" << endl;
+  //cout << "here in constructor" << endl;
   size = 0;
   front = NULL;
   back = NULL;
@@ -140,7 +140,7 @@ template<class T> DoublyLinkedList<T>::~DoublyLinkedList(){
     front->prev = node;
   }
   front = node;
-  cout<<"node inserted at the front: "<<front->data<<endl;
+  //cout<<"node inserted at the front: "<<front->data<<endl;
   size++;
 }
 
@@ -256,7 +256,7 @@ template <class T> void DoublyLinkedList<T>::writeList(ofstream &of, const strin
   while(curr != NULL || curr != nullptr)
     {
       //if (curr->next == NULL)break;
-      cout << "Printing Advisee ID \n ------- \n" << curr->data << "\n" << endl;
+      //cout << "Printing Advisee ID \n ------- \n" << curr->data << "\n" << endl;
       of << curr->data << "\n";
       curr = curr->next;
     }

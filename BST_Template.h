@@ -22,6 +22,7 @@ public:
   E* getData(){return data;};
 
   friend class masterFaculty;
+  friend class masterStudent;
   friend class Menu;
 
 };
@@ -50,6 +51,7 @@ template<typename E>TreeNode<E>::~TreeNode()
   delete left, right, data;
 }
 
+
 template <class T> class BST{
   public:
   BST();
@@ -74,10 +76,10 @@ template <class T> class BST{
   void recPrint(TreeNode<T> *node); //print a subtree if needed
   private:
     TreeNode<T> *root;
+
     friend class masterFaculty;
+    friend class masterStudent;
     friend class Menu;
-
-
 };
 
 template <class T>BST<T>::BST(){
@@ -103,12 +105,12 @@ template <class T>void BST<T>::Insert(TreeNode<T> *node)
   if (root==NULL)
   {
     root = node;//if nothing in the tree, insert at root
-    cout<<"Node inserted as the root."<<endl;
+    //cout<<"Node inserted as the root."<<endl;
   }
 
   else
   {
-    cout << "HERE "<< node->key << endl;
+    //cout << "HERE "<< node->key << endl;
     TreeNode<T> *curr = root;
     TreeNode<T> *parent = nullptr;
     //had to get rid of a parentheses to make it local but doesn't stop the loop in main
@@ -123,7 +125,7 @@ template <class T>void BST<T>::Insert(TreeNode<T> *node)
         if (curr == nullptr || curr == NULL)//we made it to the leafs
         {
             parent->left = node; //adding under the current/parent -> left since the value is smaller
-            cout<<"node inserted"<<endl;
+            //cout<<"node inserted"<<endl;
             break; //exiting the loop
         }
       }
@@ -135,7 +137,7 @@ template <class T>void BST<T>::Insert(TreeNode<T> *node)
           if (curr == nullptr || curr == NULL) //we made it to the leafs
           {
             parent->right = node; //adding under the current/parent -> right since the value is greater
-            cout<<"node inserted"<<endl;
+            //cout<<"node inserted"<<endl;
             break; //exiting the loop
           }
         }
@@ -146,46 +148,47 @@ template <class T>void BST<T>::Insert(TreeNode<T> *node)
 
 template <class T> bool BST<T>::Search(int value)
 {
-  if (root == NULL || root->key == value)
+  if (root == NULL)
   {
     cout << "The ID does not exist... Sorry." << endl;
     return false;
   }
   else
   {
+    //cout <<"hehe not working hoe ->segfault in your face :)" << endl;
     TreeNode<T> *curr = root;
     while (curr->key != value)
     {
-      if(value < curr->key)curr = curr->left;
-      else curr = curr->right;
-      if (curr == NULL)return false;
+      if(value < curr->key)
+        curr = curr->left;
+      else
+        curr = curr->right;
+      if (curr == NULL)
+      {
+        cout << "The ID does not exist... Sorry." << endl;
+        return false;
+      }
     }
   }
-  cout << "The ID has been found..." << endl;
   return true;
+  //cout << "The ID has been found..." << endl;
 
 }
 
 template <class T> TreeNode<T>* BST<T>::getNode(int value)
 {
-  if (root == NULL || root->key == value)
+  TreeNode<T> *curr = root;
+  if (Search(value))
   {
-    cout << "The ID does not exist... Sorry." << endl;
-
-  }
-  else
-  {
-    TreeNode<T> *curr = root;
     while (curr->key != value)
     {
-      if(value < curr->key)curr = curr->left;
-      else curr = curr->right;
-      if (curr == NULL)return curr;
+      if(value < curr->key)
+        curr = curr->left;
+      else
+        curr = curr->right;
     }
-    return curr;
+      return curr;
   }
-  cout << "The ID has been found..." << endl;
-
 }
 
 template <class T> bool BST<T>::deleteNode(int value)

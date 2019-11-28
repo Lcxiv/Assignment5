@@ -5,6 +5,8 @@
 #include "DoublyLinkedList.h"
 #include "masterFaculty.h"
 #include "FileReader.h"
+#include "masterStudent.h"
+#include "Menu.h"
 using namespace std;
 
 
@@ -53,9 +55,49 @@ int main(int argc, char const *argv[]) {
 //  cout<< "Comparing two ID's: " << a->operator==(*c) << endl;
 //  treeF->deleteNode(f->getID());
 // treeF->printTree();
-masterFaculty mf;
-mf.readFromFile("FacultyTable.bin");
-mf.saveFile();
+// masterFaculty *mf = new masterFaculty();
+// mf->readFromFile("FacultyTable.bin");
+//mf.saveFile();
+//int id;
+// masterStudent ms;
+// ms.readFromFile("StudentTable.bin");
+//ms.saveFile();
+// cout << "Please enter the faculty ID you want to display." << endl;
+// cin >> id;
+// TreeNode<Faculty> *node = new TreeNode<Faculty>();
+//mf->searchFaculty(id);
+// node = mf->facultyTree->getNode(id);
+// node->getData()->print();
+// node->getData()->printAdvisee();
+// if (mf->Search(id))
+// {
+//   node = mf->searchFaculty(id);
+//   node->getData()->print();
+//   node->getData()->printAdvisee();
+// }
+Menu m;
+
+cout << "Printing all the options possible... " << endl;
+cout << "Choice 1: Print all students and their information (sorted by ascending id #)." << endl;
+cout << "Choice 2: Print all faculty and their information (sorted by ascending id #)." << endl;
+cout << "Choice 3: Find and display student information given the students id." << endl;
+cout << "Choice 4: Find and display faculty information given the faculty id." << endl;
+cout << "Choice 5: Given a student’s id, print the name and info of their faculty advisor." << endl;
+cout << "Choice 6: Given a faculty id, print ALL the names and info of his/her advisees." << endl;
+cout << "Choice 7: Add a new student." << endl;
+cout << "Choice 8: Delete a student." << endl;
+cout << "Choice 9: Add a new faculty member." << endl;
+cout << "Choice 10: Delete a faculty member given the id. " << endl;
+cout << "Choice 11: Change a student’s advisor given the student id and the new faculty id." << endl;
+cout << "Choice 12: Remove an advisee from a faculty member given the ids" << endl;
+cout << "Choice 13: Rollback your command (Up to 5 times.)" << endl;
+cout << "Choice 14: Exit" << endl;
+int pick = 0;
+cout << "Choose your option: " << endl;
+cout << "Remember, to display all the possible options, enter 0 when your new choice is asked." << endl;
+cin >> pick;
+m.Options(pick);
+
 
   return 0;
 }
