@@ -1,3 +1,13 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+BST_Template.h
+ */
+
+
 #ifndef BST_TEMPLATE_H
 #define BST_TEMPLATE_H
 #include "Faculty.h"
@@ -150,7 +160,7 @@ template <class T> bool BST<T>::Search(int value)
 {
   if (root == NULL)
   {
-    cout << "The ID does not exist... Sorry." << endl;
+    //cout << "The ID does not exist... Sorry." << endl;
     return false;
   }
   else

@@ -1,14 +1,17 @@
-#ifndef DOUBLYLINKEDLIST_H
-#define DOUBLYLINKEDLIST_H
-#include"ListEmpty.h"
-#include <fstream>
 /*
 Louis Condevaux
+Cindy Ramirez
 Section 1
 C2305172
 Assignment 5
 DoublyLL.h
  */
+
+#ifndef DOUBLYLINKEDLIST_H
+#define DOUBLYLINKEDLIST_H
+#include"ListEmpty.h"
+#include <fstream>
+
 
 /**
  * [ListNode is a class/structure used to store the nodes]

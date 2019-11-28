@@ -1,3 +1,12 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+FileReader.h
+ */
+
 #ifndef FILEREADER_H
 #define FILEREADER_H
 #include <iostream>

@@ -1,3 +1,12 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+main.cpp
+ */
+
 #include<iostream>
 #include "Faculty.h"
 #include "Student.h"
@@ -57,6 +66,7 @@ int main(int argc, char const *argv[]) {
 // treeF->printTree();
 // masterFaculty *mf = new masterFaculty();
 // mf->readFromFile("FacultyTable.bin");
+//mf->createFaculty();
 //mf.saveFile();
 //int id;
 // masterStudent ms;

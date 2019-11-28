@@ -1,3 +1,12 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+Student.cpp
+ */
+
 #include<iostream>
 #include "Student.h"
 #include "Person.h"

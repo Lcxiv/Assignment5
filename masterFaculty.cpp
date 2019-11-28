@@ -1,13 +1,25 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+masterFaculty.cpp
+ */
+
+
 #include "masterFaculty.h"
 using namespace std;
 
 masterFaculty::masterFaculty(){
   BST<Faculty> *facultyTree = NULL;
+  GenStack<BST<Faculty>*> *facultyStack = NULL;
   //Faculty *facultyStaff = NULL;
 }
 
 masterFaculty::~masterFaculty(){
   delete facultyTree;
+  delete facultyStack;
 }
 
 void masterFaculty::addFaculty(TreeNode<Faculty> *node)
@@ -54,7 +66,6 @@ void masterFaculty::createFaculty()
 
     nodeFaculty = new TreeNode<Faculty>(facultyStaff->getID(), facultyStaff); //creating a new treeNode to insert it inside the tree with a specific ID.
     facultyTree->Insert(nodeFaculty); //inserting the node inside the tree
-
     //checking if the User wants to create another faculty member
 
     cout << "Would you like to add another faculty member? Y/N" << endl;
@@ -83,7 +94,6 @@ void masterFaculty::deleteFaculty(int id)
   else
   {
     facultyTree->deleteNode(id);
-
   }
 }
 
@@ -156,7 +166,6 @@ void masterFaculty::readFromFile(const string &name)
       {
         cout << "An error occured while opening the file." << endl;
       }
-
       //place where the faculty member is added to the tree
 
       // nodeFaculty = new TreeNode<Faculty>(facultyStaff->getID(), facultyStaff);
@@ -184,7 +193,7 @@ void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
   {
     if (of.is_open())
     {
-      cout << "Printing data into " << name << "..... \n" << endl;
+      //cout << "Printing data into " << name << "..... \n" << endl;
       if (node == nullptr)
         return;
       else
@@ -193,15 +202,15 @@ void masterFaculty::writeFile(const string &name, TreeNode<Faculty>*node){
         if (node != NULL)
         {
           //of.open(name);
-          cout << "Printing ID \n ------- \n" << node->getData()->getID() << "\n" << endl;
+          //cout << "Printing ID \n ------- \n" << node->getData()->getID() << "\n" << endl;
           of << node->getData()->getID() << "\n";
-          cout << "Printing Name \n ------- \n" << node->getData()->getName() << "\n" << endl;
+          //cout << "Printing Name \n ------- \n" << node->getData()->getName() << "\n" << endl;
           of << node->getData()->getName() << "\n";
-          cout << "Printing Level \n ------- \n" << node->getData()->getLevel() << "\n" << endl;
+          //cout << "Printing Level \n ------- \n" << node->getData()->getLevel() << "\n" << endl;
           of << node->getData()->getLevel() << "\n";
-          cout << "Printing Department \n ------- \n" << node->getData()->getDepartment() << "\n" << endl;
+          //cout << "Printing Department \n ------- \n" << node->getData()->getDepartment() << "\n" << endl;
           of << node->getData()->getDepartment() << "\n";
-          cout << "Printing Size \n  ------- \n" << node->getData()->getSize() << "\n" << endl;
+          //cout << "Printing Size \n  ------- \n" << node->getData()->getSize() << "\n" << endl;
           of << node->getData()->getSize() << "\n"; //size of the doubly, needed for reading the file
           //still needs to find a way to add the list advisees
 
@@ -230,4 +239,14 @@ void masterFaculty::printFaculty(int id)
   node = facultyTree->getNode(id);
   node->getData()->print();
   node->getData()->printAdvisee();
+}
+
+void masterFaculty::addStack()
+{
+  facultyStack->push(facultyTree);
+}
+
+void masterFaculty::deleteStack()
+{
+  facultyStack->pop();
 }

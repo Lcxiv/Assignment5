@@ -1,8 +1,18 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+masterStudent.cpp
+ */
+
 #include "masterStudent.h"
 
 masterStudent::masterStudent()
 {
   BST<Student> *studentTree = NULL;
+
 }
 
 masterStudent::~masterStudent()
@@ -58,7 +68,7 @@ void masterStudent::createStudent()
 
     stud = new Student(id,n,level,majorF,studGPA,advisorID);
 
-    cout << "The process to add a faculty member is complete." << endl;
+    cout << "The process to add a Student member is complete." << endl;
 
     nodeStudent = new TreeNode<Student>(stud->getID(), stud); //creating a new treeNode to insert it inside the tree with a specific ID.
     studentTree->Insert(nodeStudent); //inserting the node inside the tree
@@ -171,7 +181,7 @@ void masterStudent::writeFile(const string &name, TreeNode<Student> *node)
   {
     if (of.is_open())
     {
-      cout << "Printing data into " << name << "..... \n" << endl;
+      //cout << "Printing data into " << name << "..... \n" << endl;
       if (node == nullptr)
         return;
       else
@@ -180,22 +190,22 @@ void masterStudent::writeFile(const string &name, TreeNode<Student> *node)
         if (node != NULL)
         {
           //of.open(name);
-          cout << "Printing ID \n ------- \n" << node->getData()->getID() << "\n" << endl;
+          //cout << "Printing ID \n ------- \n" << node->getData()->getID() << "\n" << endl;
           of << node->getData()->getID() << "\n";
 
-          cout << "Printing Name \n ------- \n" << node->getData()->getName() << "\n" << endl;
+          //cout << "Printing Name \n ------- \n" << node->getData()->getName() << "\n" << endl;
           of << node->getData()->getName() << "\n";
 
-          cout << "Printing Level \n ------- \n" << node->getData()->getLevel() << "\n" << endl;
+          //cout << "Printing Level \n ------- \n" << node->getData()->getLevel() << "\n" << endl;
           of << node->getData()->getLevel() << "\n";
 
-          cout << "Printing Major \n ------- \n" << node->getData()->getMajorField() << "\n" << endl;
+          //cout << "Printing Major \n ------- \n" << node->getData()->getMajorField() << "\n" << endl;
           of << node->getData()->getMajorField() << "\n";
 
-          cout << "Printing GPA  \n  ------- \n" << node->getData()->getGPA() << "\n" << endl;
+          //cout << "Printing GPA  \n  ------- \n" << node->getData()->getGPA() << "\n" << endl;
           of << node->getData()->getGPA() << "\n";
 
-          cout << "Printing Advisor ID \n  ------- \n" << node->getData()->getAdvisorField() << "\n" << endl;
+          //cout << "Printing Advisor ID \n  ------- \n" << node->getData()->getAdvisorField() << "\n" << endl;
           of << node->getData()->getAdvisorField() << "\n";
 
           of.close();
@@ -210,7 +220,17 @@ void masterStudent::writeFile(const string &name, TreeNode<Student> *node)
   }
 }
 
-void masterStudent::saveFile()
+ void masterStudent::saveFile()
 {
   writeFile("SaveStudentTable.bin", studentTree->root);
+}
+
+void masterStudent::addStack()
+{
+  studentStack->push(studentTree);
+}
+
+void masterStudent::deleteStack()
+{
+  studentStack->pop();
 }

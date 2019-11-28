@@ -1,3 +1,12 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+Person.h
+ */
+
 #ifndef PERSON_H
 #define PERSON_H
 #include <iostream>

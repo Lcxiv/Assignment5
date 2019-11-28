@@ -1,6 +1,16 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+masterStudent.h
+ */
+
 #ifndef MASTERSTUDENT_H
 #define MASTERSTUDENT_H
 
+#include "GenStack.h"
 #include "BST_Template.h"
 #include "Student.h"
 #include "DoublyLinkedList.h"
@@ -14,6 +24,7 @@ class masterStudent
 {
 private:
   BST<Student> *studentTree = new BST<Student>();
+  GenStack<BST<Student>*> *studentStack = new GenStack<BST<Student>*>(5);
 
 public:
 
@@ -30,6 +41,9 @@ public:
   void readFromFile(const string &name);
   void saveFile();
   void writeFile(const string &name, TreeNode<Student> *node);
+
+  void addStack();
+  void deleteStack();
 
   void print();
 

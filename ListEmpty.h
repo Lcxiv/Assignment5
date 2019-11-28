@@ -1,10 +1,12 @@
 /*
 Louis Condevaux
+Cindy Ramirez
 Section 1
 C2305172
 Assignment 4
 ListEmpty.h
  */
+
 #ifndef _LISTEMPTY_H
 #define _LISTEMPTY_H
 

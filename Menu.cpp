@@ -1,3 +1,12 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+Menu.cpp
+ */
+
 #include <iostream>
 #include "masterFaculty.h"
 #include "masterStudent.h"
@@ -11,7 +20,10 @@ using namespace std;
 
 
 
-
+/**
+ * [Menu::Options is the same as a main with all the possibilities added into one method that will be called into the main]
+ * @param choice [description]
+ */
 
 void Menu::Options(unsigned int choice)
 {
@@ -134,33 +146,29 @@ void Menu::Options(unsigned int choice)
     //cout << "Choice 6: Given a faculty id, print ALL the names and info of his/her advisees." << endl;
       else if (choice == 6)
       {
-        // cout << "Please enter the Faculty ID:" << endl;
-        // cin >> id;
-        //
-        // TreeNode<Faculty> *nodeF = new TreeNode<Faculty>();
-        // TreeNode<Student> *nodeStud = new TreeNode<Student>();
-        // int adviseeNum;
-        // int studLengthID;
-        //
-        //
-        // if (mf->Search(id))
-        // {
-        //   nodeF = mf->searchFaculty(id);
-        //   studLengthID = nodeF->getData()->getSize();
-        //   nodeF->getData()->printAdvisee();
-        //   cout << "here" << endl;
-        //   cout << nodeF->getData()->adviseeList->getFirst()<<endl;
-        //   for (int i = 0; i < studLengthID; i++)
-        //   {
-        //     adviseeNum = nodeF->getData()->adviseeList->;
-        //     cout << "Advisee: " << adviseeNum << endl;
-        //     if (ms->Search(adviseeNum))
-        //     {
-        //       nodeStud = ms->searchStudent(adviseeNum);
-        //       nodeStud->getData()->print();
-        //     }
-        //   }
-        // }
+        cout << "Please enter the Faculty ID:" << endl;
+        cin >> id;
+        TreeNode<Faculty> *nodeF = new TreeNode<Faculty>();
+        TreeNode<Student> *nodeStud = new TreeNode<Student>();
+        int adviseeNum;
+        int studLengthID;
+
+
+        if (mf->Search(id))
+        {
+          nodeF = mf->searchFaculty(id);
+          studLengthID = nodeF->getData()->getSize();
+          nodeF->getData()->printAdvisee();
+          //cout << "here" << endl;
+
+          if (ms->Search(nodeF->getData()->adviseeList->getFirst()))
+          {
+            nodeStud = ms->searchStudent(nodeF->getData()->adviseeList->getFirst());
+            nodeStud->getData()->print();
+            nodeStud = ms->searchStudent(nodeF->getData()->adviseeList->getLast());
+            nodeStud->getData()->print();
+          }
+        }
         cout << "Please enter your new choice: " << endl;
         cin >> choice;
       }
@@ -168,6 +176,8 @@ void Menu::Options(unsigned int choice)
       else if (choice == 7)
       {
         ms->createStudent();
+        //ms->readFromFile("StudentTable.bin");
+        ms->addStack();
         cout << "Please enter your new choice: " << endl;
         cin >> choice;
       }
@@ -177,6 +187,7 @@ void Menu::Options(unsigned int choice)
         cout << "Please enter which ID in order to delete the Student that matches." << endl;
         cin >> id;
         ms->deleteStudent(id);
+        ms->addStack();
         cout << "Please enter your new choice: " << endl;
         cin >> choice;
       }
@@ -184,6 +195,7 @@ void Menu::Options(unsigned int choice)
     else if (choice == 9)
     {
       mf->createFaculty();
+      mf->addStack();
       cout << "Please enter your new choice: " << endl;
       cin >> choice;
     }
@@ -193,6 +205,7 @@ void Menu::Options(unsigned int choice)
       cout << "Please enter which ID in order to delete the faculty member that matches." << endl;
       cin >> id;
       mf->deleteFaculty(id);
+      mf->addStack();
       cout << "Please enter your new choice: " << endl;
       cin >> choice;
     }
@@ -211,6 +224,7 @@ void Menu::Options(unsigned int choice)
         nodeS->getData()->setAdvisor(newID);
         cout << "The Student has been correctly reassigned." << endl;
       }
+      ms->addStack();
       cout << "Please enter your new choice: " << endl;
       cin >> choice;
     }
@@ -226,10 +240,20 @@ void Menu::Options(unsigned int choice)
         cout << "Please enter the Student ID you wish to delete" << endl;
         nodeF->getData()->adviseeList->deletePos(idToDelete);
       }
+      mf->addStack();
       cout << "Please enter your new choice: " << endl;
       cin >> choice;
     }
     //cout << "Choice 13: Rollback your command (Up to 5 times.)" << endl;
+    else if (choice == 13)
+    {
+      cout << "Enter the number of times you want to rollback: " << endl;
+      unsigned int numRoll;
+      cin >> numRoll;
+      for (int i = 0; i < numRoll; i++)
+        mf->deleteStack();
+        ms->deleteStack();
+    }
     //cout << "Choice 14: Exit" << endl;
       else if (choice == 14)
       {

@@ -1,3 +1,12 @@
+/*
+Louis Condevaux
+Cindy Ramirez
+Section 1
+C2305172
+Assignment 5
+Faculty.h
+ */
+
 #ifndef FACULTY_H
 #define FACULTY_H
 #include "DoublyLinkedList.h"
