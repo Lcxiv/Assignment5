@@ -76,7 +76,15 @@ void masterFaculty::createFaculty()
 }
 void masterFaculty::deleteFaculty(int id)
 {
-  facultyTree->deleteNode(id);
+  if (!facultyTree->getNode(id)->getData()->adviseeList->isEmpty())
+  {
+    cout << "Oooops, you tried to delete a faculty member that still has advisees. Rearrange them first!" << endl;
+  }
+  else
+  {
+    facultyTree->deleteNode(id);
+
+  }
 }
 
 bool masterFaculty::Search(int idF)

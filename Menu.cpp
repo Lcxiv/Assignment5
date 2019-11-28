@@ -23,6 +23,7 @@ void Menu::Options(unsigned int choice)
   ms->readFromFile("StudentTable.bin");
 
   bool notOver = true;
+  cout << "Choose your option based on the action you want to perform." << endl;
 
 
   while (notOver)
@@ -103,6 +104,7 @@ void Menu::Options(unsigned int choice)
           nodeS = ms->searchStudent(id);
           studAdvisorID = nodeS->getData()->getAdvisorField();
           TreeNode<Faculty> *nodeF = new TreeNode<Faculty>();
+          nodeS->getData()->print();
           if (mf->Search(studAdvisorID))
           {
             nodeF = mf->searchFaculty(id);
@@ -190,7 +192,6 @@ void Menu::Options(unsigned int choice)
         cout << "Goodbye." << endl;
         notOver = false;
       }
-    cout << "Choose your option based on the action you want to perform." << endl;
   }
 
 }
